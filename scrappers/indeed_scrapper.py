@@ -1,11 +1,10 @@
 import os
-from random import randint, choice
-from selenium.webdriver.support.ui import Select, WebDriverWait
+from random import randint
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException, ElementNotInteractableException
+from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from fake_useragent import UserAgent
 
 # Class to represent a job scrapper for Indeed
