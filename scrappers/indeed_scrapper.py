@@ -34,16 +34,32 @@ class Indeed_Scrapper:
         
         #Uncomment below line for real site usage
         #self.browser.get('https://www.indeed.com')
+    
+    def exit(self):
+        self.browser.quit()
         
     # #TODO: Create a functions that gets relavent filter options for job searches
     # def get_date_posted(self):
     #     try:
     #         date_posted = self.browser.find_element(By.XPATH, '//button[normalize-space()="Date posted"]')
     
+    
+    # Gets the element that allows users to search for specific keywords related to jobs
     def get_job_searchbox(self):
         try:
             searchbox = self.browser.find_element(By.XPATH, '//input[@name="q"]')
             return searchbox
         except NoSuchElementException:
             searchbox = WebDriverWait(self.browser, randint(5, 10)).until(
-                EC.presence_of_element_located(By.XPATH, '//input[@name="q"]'))
+                EC.visibility_of_element_located((By.XPATH, '//input[@name="q"]')))
+            return searchbox
+            
+    # Gets the element that allows users to search for locations for jobs        
+    def get_location_searchbox(self):
+        try:
+            searchbox = self.browser.find_element(By.XPATH, '//input[@name="l"]')
+            return searchbox
+        except NoSuchElementException:
+            searchbox = WebDriverWait(self.browser, randint(5, 10)).until(
+                EC.visibility_of_element_located((By.XPATH, '//input[@name="l"]')))
+            return searchbox
