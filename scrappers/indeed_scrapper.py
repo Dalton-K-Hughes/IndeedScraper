@@ -1,3 +1,4 @@
+import os
 from random import randint, choice
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -23,6 +24,27 @@ class Indeed_Scrapper:
         user_agent = UserAgent()
         user_agent = user_agent.random
         options.add_argument(f'user-agent={user_agent}')
-        
         self.browser = webdriver.Chrome(options=options)
-        self.browser.get('https:www.indeed.com')
+        
+        #Remove below lines, testing purposes only
+        html_file = 'indeed.html'
+        abs_path = os.path.abspath(html_file)
+        file_url = f'file://{abs_path}'
+        self.browser.get(file_url)
+        #Remove above lines, testing purposed only
+        
+        #Uncomment below line for real site usage
+        #self.browser.get('https://www.indeed.com')
+        
+    # #TODO: Create a functions that gets relavent filter options for job searches
+    # def get_date_posted(self):
+    #     try:
+    #         date_posted = self.browser.find_element(By.XPATH, '//button[normalize-space()="Date posted"]')
+    
+    def get_job_searchbox(self):
+        try:
+            searchbox = self.browser.find_element(By.XPATH, '//input[@name="q"]')
+            return searchbox
+        except NoSuchElementException:
+            searchbox = WebDriverWait(self.browser, randint(5, 10)).until(
+                EC.presence_of_element_located(By.XPATH, '//input[@name="q"]'))
