@@ -63,3 +63,12 @@ class Indeed_Scrapper:
             searchbox = WebDriverWait(self.browser, randint(5, 10)).until(
                 EC.visibility_of_element_located((By.XPATH, '//input[@name="l"]')))
             return searchbox
+        
+    def get_search_button(self):
+        try:
+            button = self.browser.find_element(By.XPATH, '//button[@type="submit"]')
+            return button
+        except NoSuchElementException:
+            button = WebDriverWait(self.browser, randint(5, 10)).until(
+                EC.element_to_be_clickable((By.XPATH, '//button[@type="submit"]')))
+            return button
