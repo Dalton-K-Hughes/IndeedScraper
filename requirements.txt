@@ -2,6 +2,7 @@ attrs==25.1.0
 certifi==2025.1.31
 cffi==1.17.1
 fake-agent==0.1.4
+fake-useragent==2.0.3
 h11==0.14.0
 idna==3.10
 outcome==1.3.0.post0
